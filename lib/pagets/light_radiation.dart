@@ -32,7 +32,7 @@ class LightRadiation extends StatelessWidget {
               children: [
                 TableRow(
                     decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 222, 224, 224),
+                      color: Color.fromARGB(255, 236, 239, 240),
                     ),
                     children: [
                       Container(
@@ -42,7 +42,7 @@ class LightRadiation extends StatelessWidget {
                             "Радіус дії світлового випромінювання - опіки III ступеню (омертвіння всіх шарів шкіри та прилеглих тканин) (км)",
                             textScaleFactor: 0.95,
                             style: TextStyle(
-                              color: Color.fromARGB(255, 1, 100, 5),
+                              color: Color.fromARGB(255, 16, 160, 23),
                             ),
                           )),
                       Container(
@@ -53,7 +53,34 @@ class LightRadiation extends StatelessWidget {
                             thermalRadiation3.toStringAsFixed(3),
                             textScaleFactor: 1,
                             style: const TextStyle(
-                              color: Color.fromARGB(255, 1, 100, 5),
+                              color: Color.fromARGB(255, 16, 160, 23),
+                            ),
+                          )),
+                    ]),
+                TableRow(
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 222, 224, 224),
+                    ),
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.only(
+                              left: 5.0, bottom: 10.0, top: 10.0, right: 10.0),
+                          child: const Text(
+                            "Радіус дії світлового випромінювання – опіки II ступеню (утворення пухирів) (км)",
+                            textScaleFactor: 0.95,
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 8, 124, 14),
+                            ),
+                          )),
+                      Container(
+                          padding: const EdgeInsets.only(
+                              left: 0, bottom: 10.0, top: 10.0, right: 10.0),
+                          // height: 24,
+                          child: Text(
+                            thermalRadiation2.toStringAsFixed(3),
+                            textScaleFactor: 1,
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 8, 124, 14),
                             ),
                           )),
                     ]),
@@ -66,37 +93,10 @@ class LightRadiation extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               left: 5.0, bottom: 10.0, top: 10.0, right: 10.0),
                           child: const Text(
-                            "Радіус дії світлового випромінювання – опіки II ступеню (утворення пухирів) (км)",
-                            textScaleFactor: 0.95,
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 3, 187, 12),
-                            ),
-                          )),
-                      Container(
-                          padding: const EdgeInsets.only(
-                              left: 0, bottom: 10.0, top: 10.0, right: 10.0),
-                          // height: 24,
-                          child: Text(
-                            thermalRadiation2.toStringAsFixed(3),
-                            textScaleFactor: 1,
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 3, 187, 12),
-                            ),
-                          )),
-                    ]),
-                TableRow(
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 222, 224, 224),
-                    ),
-                    children: [
-                      Container(
-                          padding: const EdgeInsets.only(
-                              left: 5.0, bottom: 10.0, top: 10.0, right: 10.0),
-                          child: const Text(
                             "Радіус дії світлового випромінювання - опіки I ступеню (почервоніння та набряк шкіри) (км)",
                             textScaleFactor: 0.95,
                             style: TextStyle(
-                              color: Color.fromARGB(255, 0, 255, 13),
+                              color: Color.fromARGB(255, 1, 88, 4),
                             ),
                           )),
                       Container(
@@ -107,7 +107,7 @@ class LightRadiation extends StatelessWidget {
                             thermalRadiation1.toStringAsFixed(3),
                             textScaleFactor: 1,
                             style: const TextStyle(
-                              color: Color.fromARGB(255, 0, 255, 13),
+                              color: Color.fromARGB(255, 1, 88, 4),
                             ),
                           )),
                     ]),

@@ -108,14 +108,10 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           ),
         ),
         const SizedBox(
-          height: 8,
-        ),
-        const Text('   Уражаючі фактори ядерного вибуху'),
-        const SizedBox(
-          height: 8,
+          height: 10,
         ),
         Card(
-          elevation: 6,
+          elevation: 4,
           child: ListTile(
             title: const Text('Ударна хвиля'),
             // subtitle: const Text(
@@ -140,7 +136,7 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           ),
         ),
         Card(
-          elevation: 6,
+          elevation: 4,
           child: ListTile(
             title: const Text('Світлове випромінювання'),
             // subtitle: const Text(
@@ -165,7 +161,7 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           ),
         ),
         Card(
-          elevation: 6,
+          elevation: 4,
           child: ListTile(
             title: const Text('Проникаюча радіація'),
             // subtitle: const Text(
@@ -190,7 +186,7 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           ),
         ),
         Card(
-          elevation: 6,
+          elevation: 4,
           child: ListTile(
             title: const Text('Радіоактивне зараження місцевості'),
             trailing: const Icon(
@@ -214,7 +210,7 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           color: Colors.yellow[200],
           elevation: 6,
           child: ListTile(
-            title: const Text('Про NuclearSimulation'),
+            title: const Text('Про NuclearSim'),
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 14,

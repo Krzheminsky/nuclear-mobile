@@ -353,7 +353,16 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Прогноз наслідків ЯВ'),
+        // excludeHeaderSemantics: true,
+        // scrolledUnderElevation: 6,
+        // automaticallyImplyLeading: false,
+        title: const Text(
+          'Прогноз наслідків ядерного вибуху',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       drawer: buildDrawer(context, route),
       body: Padding(
@@ -444,7 +453,7 @@ class HomePage extends StatelessWidget {
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 255, 0, 0),
                       point: LatLng(x, y),
-                      color: Colors.red.withOpacity(0.0),
+                      color: Colors.red.withOpacity(0.6),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
                       radius: fireBall * 1000,
@@ -486,7 +495,7 @@ class HomePage extends StatelessWidget {
                       radius: overpressure1 * 1000,
                     ),
                     CircleMarker(
-                      borderColor: const Color.fromARGB(255, 1, 100, 5),
+                      borderColor: const Color.fromARGB(255, 1, 88, 4),
                       point: LatLng(x, y),
                       color: const Color.fromARGB(255, 210, 247, 5)
                           .withOpacity(0.0),
@@ -495,7 +504,7 @@ class HomePage extends StatelessWidget {
                       radius: thermalRadiation1 * 1000,
                     ),
                     CircleMarker(
-                      borderColor: const Color.fromARGB(255, 3, 187, 12),
+                      borderColor: const Color.fromARGB(255, 8, 124, 14),
                       point: LatLng(x, y),
                       color: const Color.fromARGB(255, 210, 247, 5)
                           .withOpacity(0.0),
@@ -504,7 +513,7 @@ class HomePage extends StatelessWidget {
                       radius: thermalRadiation2 * 1000,
                     ),
                     CircleMarker(
-                      borderColor: const Color.fromARGB(255, 0, 255, 13),
+                      borderColor: const Color.fromARGB(255, 16, 160, 23),
                       point: LatLng(x, y),
                       color: const Color.fromARGB(255, 210, 247, 5)
                           .withOpacity(0.0),
