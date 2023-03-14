@@ -208,3 +208,12 @@ class GetWidthG with ChangeNotifier {
     notifyListeners();
   }
 }
+
+class GetZoom with ChangeNotifier {
+  double _name = 5.0;
+  double get getZoom => _name;
+  void changeZoom(double newName) {
+    _name = newName;
+    notifyListeners();
+  }
+}

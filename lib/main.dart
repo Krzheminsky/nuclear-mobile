@@ -92,6 +92,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<GetWidthG>(
           create: (context) => GetWidthG(),
         ),
+        ChangeNotifierProvider<GetZoom>(
+          create: (context) => GetZoom(),
+        ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

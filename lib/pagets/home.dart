@@ -17,6 +17,7 @@ class HomePage extends StatelessWidget {
     List<LatLng> tappedPoints = [
       (context.watch<GetTappedPoints>().getTappedPoints)
     ];
+    double newZoom = context.watch<GetZoom>().getZoom;
 
     String explosionPower =
         context.watch<GetExplosionPower>().getExplosionPower.toStringAsFixed(0);
@@ -377,8 +378,14 @@ class HomePage extends StatelessWidget {
             Flexible(
               child: FlutterMap(
                 options: MapOptions(
+                    onPositionChanged: (position, hasGesture) {
+                      final zoom = position.zoom as double;
+                      context.read<GetZoom>().changeZoom(zoom);
+                    },
+                    interactiveFlags:
+                        InteractiveFlag.all & ~InteractiveFlag.rotate,
                     center: LatLng(x, y),
-                    zoom: 5,
+                    zoom: newZoom,
                     rotation: 0,
                     onTap: (TapPosition tapPosition, LatLng latlng) {
                       context
