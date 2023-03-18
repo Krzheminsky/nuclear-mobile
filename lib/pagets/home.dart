@@ -8,9 +8,19 @@ import 'package:provider/provider.dart';
 import 'package:nuclear/calculate/data_calculate.dart';
 import 'dart:math';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const String route = '/';
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool shockWave = true;
+  bool lightRad = true;
+  bool penetRad = true;
+  bool radContam = true;
 
   @override
   Widget build(BuildContext context) {
@@ -352,11 +362,14 @@ class HomePage extends StatelessWidget {
       return result;
     }
 
+    cloudeNull() {
+      List<LatLng> result = [];
+      result.add(LatLng(lat, lng));
+      return result;
+    }
+
     return Scaffold(
       appBar: AppBar(
-        // excludeHeaderSemantics: true,
-        // scrolledUnderElevation: 6,
-        // automaticallyImplyLeading: false,
         title: const Text(
           'Прогноз наслідків ядерного вибуху',
           style: TextStyle(
@@ -365,7 +378,96 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      drawer: buildDrawer(context, route),
+      drawer: buildDrawer(context, HomePage.route),
+      floatingActionButton: Row(
+        // mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 33,
+            ),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 30,
+                  child: FloatingActionButton.extended(
+                    extendedPadding: const EdgeInsets.all(8),
+                    backgroundColor: radContam ? Colors.blue : Colors.red,
+                    heroTag: 'radContam',
+                    label: const Text(
+                      'Зараження місцевості',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 10),
+                    ),
+                    onPressed: () => setState(() => radContam = !radContam),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  height: 30,
+                  // width: 50,
+                  child: FloatingActionButton.extended(
+                    extendedPadding: const EdgeInsets.all(5),
+                    backgroundColor: lightRad ? Colors.blue : Colors.red,
+                    heroTag: 'lightRad',
+                    label: const Text(
+                      'Cвітлове випромінення',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 10),
+                    ),
+                    onPressed: () => setState(() => lightRad = !lightRad),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 30,
+                child: FloatingActionButton.extended(
+                  extendedPadding: const EdgeInsets.all(34),
+                  backgroundColor: shockWave ? Colors.blue : Colors.red,
+                  heroTag: 'shockWave',
+                  label: const Text(
+                    'Ударна хвиля',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 10),
+                  ),
+                  // icon: Icon(grid ? Icons.grid_off : Icons.grid_on),
+                  onPressed: () => setState(() => shockWave = !shockWave),
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              SizedBox(
+                height: 30,
+                child: FloatingActionButton.extended(
+                  extendedPadding: const EdgeInsets.all(11),
+                  backgroundColor: penetRad ? Colors.blue : Colors.red,
+                  heroTag: 'penetRad',
+                  label: const Text(
+                    'Проникаюча радіація',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 10),
+                  ),
+                  onPressed: () => setState(() => penetRad = !penetRad),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -400,7 +502,9 @@ class HomePage extends StatelessWidget {
                   ),
                   PolygonLayer(polygons: [
                     Polygon(
-                      points: cloudeA(),
+                      points: radContam ? cloudeA() : cloudeNull(),
+                      // List<LatLng> result = []
+                      // LatLng(lat, lng)
                       label: 'Зона А',
                       labelStyle: const TextStyle(
                         color: Color.fromARGB(255, 1, 26, 255),
@@ -414,7 +518,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.blue.withOpacity(0.2),
                     ),
                     Polygon(
-                      points: cloudeB(),
+                      points: radContam ? cloudeB() : cloudeNull(),
                       label: 'Зона Б',
                       labelStyle: const TextStyle(
                         color: Color.fromARGB(255, 8, 102, 11),
@@ -428,7 +532,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.green.withOpacity(0.2),
                     ),
                     Polygon(
-                      points: cloudeV(),
+                      points: radContam ? cloudeV() : cloudeNull(),
                       label: 'Зона B',
                       labelStyle: const TextStyle(
                         color: Color.fromARGB(255, 107, 0, 0),
@@ -442,7 +546,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.red.withOpacity(0.2),
                     ),
                     Polygon(
-                      points: cloudeG(),
+                      points: radContam ? cloudeG() : cloudeNull(),
                       label: 'Зона Г',
                       labelStyle: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
@@ -463,7 +567,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.red.withOpacity(0.6),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: fireBall * 1000,
+                      radius: shockWave ? fireBall * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 201, 1, 1),
@@ -472,7 +576,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: overpressure20 * 1000,
+                      radius: shockWave ? overpressure20 * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 153, 1, 1),
@@ -481,7 +585,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: overpressure10 * 1000,
+                      radius: shockWave ? overpressure10 * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 112, 1, 1),
@@ -490,7 +594,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: overpressure5 * 1000,
+                      radius: shockWave ? overpressure5 * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 87, 1, 1),
@@ -499,7 +603,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: overpressure1 * 1000,
+                      radius: shockWave ? overpressure1 * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 1, 88, 4),
@@ -508,7 +612,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: thermalRadiation1 * 1000,
+                      radius: lightRad ? thermalRadiation1 * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 8, 124, 14),
@@ -517,7 +621,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: thermalRadiation2 * 1000,
+                      radius: lightRad ? thermalRadiation2 * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 16, 160, 23),
@@ -526,7 +630,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: thermalRadiation3 * 1000,
+                      radius: lightRad ? thermalRadiation3 * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 6, 10, 245),
@@ -535,7 +639,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: ionizingRadiation500 * 1000,
+                      radius: penetRad ? ionizingRadiation500 * 1000 : 0.0,
                     ),
                     CircleMarker(
                       borderColor: const Color.fromARGB(255, 94, 7, 255),
@@ -544,7 +648,7 @@ class HomePage extends StatelessWidget {
                           .withOpacity(0.0),
                       borderStrokeWidth: 2,
                       useRadiusInMeter: true,
-                      radius: ionizingRadiation100 * 1000,
+                      radius: penetRad ? ionizingRadiation100 * 1000 : 0.0,
                     ),
                   ]),
                   MarkerLayer(markers: markers),
