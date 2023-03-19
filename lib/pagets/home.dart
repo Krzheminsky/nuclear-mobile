@@ -8,22 +8,18 @@ import 'package:provider/provider.dart';
 import 'package:nuclear/calculate/data_calculate.dart';
 import 'dart:math';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   static const String route = '/';
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  bool shockWave = true;
-  bool lightRad = true;
-  bool penetRad = true;
-  bool radContam = true;
-
-  @override
   Widget build(BuildContext context) {
+    bool shockWave = context.watch<GetShockWave>().getShockWave;
+    bool lightRad = context.watch<GetLightRad>().getLightRad;
+    bool penetRad = context.watch<GetPenetRad>().getPenetRad;
+    bool radContam = context.watch<GetRadContam>().getRadContam;
+    bool floatingButtonViev =
+        context.watch<GetFloatingButtonViev>().getFloatingButtonViev;
     List<LatLng> tappedPoints = [
       (context.watch<GetTappedPoints>().getTappedPoints)
     ];
@@ -378,96 +374,110 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      drawer: buildDrawer(context, HomePage.route),
-      floatingActionButton: Row(
-        // mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 33,
-            ),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
+      drawer: buildDrawer(context, route),
+      floatingActionButton: floatingButtonViev
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(
-                  height: 30,
-                  child: FloatingActionButton.extended(
-                    extendedPadding: const EdgeInsets.all(8),
-                    backgroundColor: radContam ? Colors.blue : Colors.red,
-                    heroTag: 'radContam',
-                    label: const Text(
-                      'Зараження місцевості',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 10),
-                    ),
-                    onPressed: () => setState(() => radContam = !radContam),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 33,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        height: 30,
+                        child: FloatingActionButton.extended(
+                            extendedPadding: const EdgeInsets.all(8),
+                            backgroundColor:
+                                radContam ? Colors.blue : Colors.red,
+                            heroTag: 'radContam',
+                            label: const Text(
+                              'Зараження місцевості',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 10),
+                            ),
+                            onPressed: () => context
+                                .read<GetRadContam>()
+                                .changeRadContam(!radContam)
+                            // setState(() => radContam = !radContam),
+                            ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      SizedBox(
+                        height: 30,
+                        // width: 50,
+                        child: FloatingActionButton.extended(
+                            extendedPadding: const EdgeInsets.all(5),
+                            backgroundColor:
+                                lightRad ? Colors.blue : Colors.red,
+                            heroTag: 'lightRad',
+                            label: const Text(
+                              'Cвітлове випромінення',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 10),
+                            ),
+                            onPressed: () => context
+                                .read<GetLightRad>()
+                                .changeLightRad(!lightRad)
+                            // setState(() => lightRad = !lightRad),
+                            ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                  height: 30,
-                  // width: 50,
-                  child: FloatingActionButton.extended(
-                    extendedPadding: const EdgeInsets.all(5),
-                    backgroundColor: lightRad ? Colors.blue : Colors.red,
-                    heroTag: 'lightRad',
-                    label: const Text(
-                      'Cвітлове випромінення',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 10),
+                Column(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 30,
+                      child: FloatingActionButton.extended(
+                          extendedPadding: const EdgeInsets.all(34),
+                          backgroundColor: shockWave ? Colors.blue : Colors.red,
+                          heroTag: 'shockWave',
+                          label: const Text(
+                            'Ударна хвиля',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 10),
+                          ),
+                          // icon: Icon(grid ? Icons.grid_off : Icons.grid_on),
+                          onPressed: () => context
+                              .read<GetShockWave>()
+                              .changeShockWave(!shockWave)
+                          // setState(() => shockWave = !shockWave),
+                          ),
                     ),
-                    onPressed: () => setState(() => lightRad = !lightRad),
-                  ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      height: 30,
+                      child: FloatingActionButton.extended(
+                          extendedPadding: const EdgeInsets.all(11),
+                          backgroundColor: penetRad ? Colors.blue : Colors.red,
+                          heroTag: 'penetRad',
+                          label: const Text(
+                            'Проникаюча радіація',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 10),
+                          ),
+                          onPressed: () => context
+                              .read<GetPenetRad>()
+                              .changePenetRad(!penetRad)
+                          // setState(() => penetRad = !penetRad),
+                          ),
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ),
-          Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 30,
-                child: FloatingActionButton.extended(
-                  extendedPadding: const EdgeInsets.all(34),
-                  backgroundColor: shockWave ? Colors.blue : Colors.red,
-                  heroTag: 'shockWave',
-                  label: const Text(
-                    'Ударна хвиля',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  // icon: Icon(grid ? Icons.grid_off : Icons.grid_on),
-                  onPressed: () => setState(() => shockWave = !shockWave),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                height: 30,
-                child: FloatingActionButton.extended(
-                  extendedPadding: const EdgeInsets.all(11),
-                  backgroundColor: penetRad ? Colors.blue : Colors.red,
-                  heroTag: 'penetRad',
-                  label: const Text(
-                    'Проникаюча радіація',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  onPressed: () => setState(() => penetRad = !penetRad),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+            )
+          : null,
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(

@@ -217,3 +217,48 @@ class GetZoom with ChangeNotifier {
     notifyListeners();
   }
 }
+
+class GetFloatingButtonViev with ChangeNotifier {
+  bool _name = false;
+  bool get getFloatingButtonViev => _name;
+  void changeFloatingButtonViev(bool newName) {
+    _name = newName;
+    notifyListeners();
+  }
+}
+
+class GetShockWave with ChangeNotifier {
+  bool _name = true;
+  bool get getShockWave => _name;
+  void changeShockWave(bool newName) {
+    _name = newName;
+    notifyListeners();
+  }
+}
+
+class GetLightRad with ChangeNotifier {
+  bool _name = true;
+  bool get getLightRad => _name;
+  void changeLightRad(bool newName) {
+    _name = newName;
+    notifyListeners();
+  }
+}
+
+class GetPenetRad with ChangeNotifier {
+  bool _name = true;
+  bool get getPenetRad => _name;
+  void changePenetRad(bool newName) {
+    _name = newName;
+    notifyListeners();
+  }
+}
+
+class GetRadContam with ChangeNotifier {
+  bool _name = true;
+  bool get getRadContam => _name;
+  void changeRadContam(bool newName) {
+    _name = newName;
+    notifyListeners();
+  }
+}

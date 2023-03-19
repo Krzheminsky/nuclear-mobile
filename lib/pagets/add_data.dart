@@ -769,6 +769,9 @@ class AddData extends StatelessWidget {
               context.read<GetDepthG>().changeDepthG(depthG);
               context.read<GetWidthG>().changeWidthG(widthG);
               context.read<GetZoom>().changeZoom(10);
+              context
+                  .read<GetFloatingButtonViev>()
+                  .changeFloatingButtonViev(true);
 
               Navigator.pushNamed(context, '/');
             },

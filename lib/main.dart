@@ -95,6 +95,21 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<GetZoom>(
           create: (context) => GetZoom(),
         ),
+        ChangeNotifierProvider<GetFloatingButtonViev>(
+          create: (context) => GetFloatingButtonViev(),
+        ),
+        ChangeNotifierProvider<GetShockWave>(
+          create: (context) => GetShockWave(),
+        ),
+        ChangeNotifierProvider<GetLightRad>(
+          create: (context) => GetLightRad(),
+        ),
+        ChangeNotifierProvider<GetPenetRad>(
+          create: (context) => GetPenetRad(),
+        ),
+        ChangeNotifierProvider<GetRadContam>(
+          create: (context) => GetRadContam(),
+        ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
