@@ -7,6 +7,8 @@ import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
 import 'package:provider/provider.dart';
 import 'package:nuclear/calculate/data_calculate.dart';
 import 'dart:math';
+import 'package:nuclear/utils/scale_layer_plugin_option.dart';
+import 'package:nuclear/utils/zoombuttons_plugin_option.dart';
 
 class HomePage extends StatelessWidget {
   static const String route = '/';
@@ -108,33 +110,35 @@ class HomePage extends StatelessWidget {
       } else {
         latStepOne = lat +
             ((((widthA - thermalRadiation33) * 1000) *
-                    cos((360 + directionWind) * 3.1415 / 180)) /
+                    cos((360 + directionWind + 180) * 3.1415 / 180)) /
                 (6371000 * 3.1415 / 180));
         lngStepOne = lng +
             (widthA - thermalRadiation33) *
                 1000 *
-                sin((360 + directionWind) * 3.1415 / 180) /
+                sin((360 + directionWind + 180) * 3.1415 / 180) /
                 cos(lat * 3.1415 / 180) /
                 (6371000 * 3.1415 / 180);
         latStepTwo = lat +
             ((((depthA - (widthA / 6)) * 1000) *
-                    cos((360 + directionWind) * 3.1415 / 180)) /
+                    cos((360 + directionWind + 180) * 3.1415 / 180)) /
                 (6371000 * 3.1415 / 180));
         lngStepTwo = lng +
             (depthA - (widthA / 6)) *
                 1000 *
-                sin((360 + directionWind) * 3.1415 / 180) /
+                sin((360 + directionWind + 180) * 3.1415 / 180) /
                 cos(lat * 3.1415 / 180) /
                 (6371000 * 3.1415 / 180);
 
         for (var i = -90; i <= 90; i++) {
           latOne = latStepTwo +
-              (((widthA / 6) * 1000 * cos((i + directionWind) * 3.1415 / 180)) /
+              (((widthA / 6) *
+                      1000 *
+                      cos((i + directionWind + 180) * 3.1415 / 180)) /
                   (6371000 * 3.1415 / 180));
           lngOne = lngStepTwo +
               ((widthA / 6) *
                   1000 *
-                  sin((i + directionWind) * 3.1415 / 180) /
+                  sin((i + directionWind + 180) * 3.1415 / 180) /
                   cos(lat * 3.1415 / 180) /
                   (6371000 * 3.1415 / 180));
           result.add(LatLng(latOne, lngOne));
@@ -142,12 +146,14 @@ class HomePage extends StatelessWidget {
 
         for (var i = 90; i <= 270; i++) {
           latOne = latStepOne +
-              (((widthA) * 1000 * cos((i + directionWind) * 3.1415 / 180)) /
+              (((widthA) *
+                      1000 *
+                      cos((i + directionWind + 180) * 3.1415 / 180)) /
                   (6371000 * 3.1415 / 180));
           lngOne = lngStepOne +
               ((widthA) *
                   1000 *
-                  sin((i + directionWind) * 3.1415 / 180) /
+                  sin((i + directionWind + 180) * 3.1415 / 180) /
                   cos(lat * 3.1415 / 180) /
                   (6371000 * 3.1415 / 180));
           result.add(LatLng(latOne, lngOne));
@@ -175,33 +181,35 @@ class HomePage extends StatelessWidget {
       } else {
         latStepOne = lat +
             ((((widthB - overpressure5) * 1000) *
-                    cos((360 + directionWind) * 3.1415 / 180)) /
+                    cos((360 + directionWind + 180) * 3.1415 / 180)) /
                 (6371000 * 3.1415 / 180));
         lngStepOne = lng +
             (widthB - overpressure5) *
                 1000 *
-                sin((360 + directionWind) * 3.1415 / 180) /
+                sin((360 + directionWind + 180) * 3.1415 / 180) /
                 cos(lat * 3.1415 / 180) /
                 (6371000 * 3.1415 / 180);
         latStepTwo = lat +
             ((((depthB - (widthB / 6)) * 1000) *
-                    cos((360 + directionWind) * 3.1415 / 180)) /
+                    cos((360 + directionWind + 180) * 3.1415 / 180)) /
                 (6371000 * 3.1415 / 180));
         lngStepTwo = lng +
             (depthB - (widthB / 6)) *
                 1000 *
-                sin((360 + directionWind) * 3.1415 / 180) /
+                sin((360 + directionWind + 180) * 3.1415 / 180) /
                 cos(lat * 3.1415 / 180) /
                 (6371000 * 3.1415 / 180);
 
         for (var i = -90; i <= 90; i++) {
           latOne = latStepTwo +
-              (((widthB / 6) * 1000 * cos((i + directionWind) * 3.1415 / 180)) /
+              (((widthB / 6) *
+                      1000 *
+                      cos((i + directionWind + 180) * 3.1415 / 180)) /
                   (6371000 * 3.1415 / 180));
           lngOne = lngStepTwo +
               ((widthB / 6) *
                   1000 *
-                  sin((i + directionWind) * 3.1415 / 180) /
+                  sin((i + directionWind + 180) * 3.1415 / 180) /
                   cos(lat * 3.1415 / 180) /
                   (6371000 * 3.1415 / 180));
           result.add(LatLng(latOne, lngOne));
@@ -209,12 +217,14 @@ class HomePage extends StatelessWidget {
 
         for (var i = 90; i <= 270; i++) {
           latOne = latStepOne +
-              (((widthB) * 1000 * cos((i + directionWind) * 3.1415 / 180)) /
+              (((widthB) *
+                      1000 *
+                      cos((i + directionWind + 180) * 3.1415 / 180)) /
                   (6371000 * 3.1415 / 180));
           lngOne = lngStepOne +
               ((widthB) *
                   1000 *
-                  sin((i + directionWind) * 3.1415 / 180) /
+                  sin((i + directionWind + 180) * 3.1415 / 180) /
                   cos(lat * 3.1415 / 180) /
                   (6371000 * 3.1415 / 180));
           result.add(LatLng(latOne, lngOne));
@@ -243,33 +253,35 @@ class HomePage extends StatelessWidget {
       } else {
         latStepOne = lat +
             ((((widthV - overpressure10) * 1000) *
-                    cos((360 + directionWind) * 3.1415 / 180)) /
+                    cos((360 + directionWind + 180) * 3.1415 / 180)) /
                 (6371000 * 3.1415 / 180));
         lngStepOne = lng +
             (widthV - overpressure10) *
                 1000 *
-                sin((360 + directionWind) * 3.1415 / 180) /
+                sin((360 + directionWind + 180) * 3.1415 / 180) /
                 cos(lat * 3.1415 / 180) /
                 (6371000 * 3.1415 / 180);
         latStepTwo = lat +
             ((((depthV - (widthV / 6)) * 1000) *
-                    cos((360 + directionWind) * 3.1415 / 180)) /
+                    cos((360 + directionWind + 180) * 3.1415 / 180)) /
                 (6371000 * 3.1415 / 180));
         lngStepTwo = lng +
             (depthV - (widthV / 6)) *
                 1000 *
-                sin((360 + directionWind) * 3.1415 / 180) /
+                sin((360 + directionWind + 180) * 3.1415 / 180) /
                 cos(lat * 3.1415 / 180) /
                 (6371000 * 3.1415 / 180);
 
         for (var i = -90; i <= 90; i++) {
           latOne = latStepTwo +
-              (((widthV / 6) * 1000 * cos((i + directionWind) * 3.1415 / 180)) /
+              (((widthV / 6) *
+                      1000 *
+                      cos((i + directionWind + 180) * 3.1415 / 180)) /
                   (6371000 * 3.1415 / 180));
           lngOne = lngStepTwo +
               ((widthV / 6) *
                   1000 *
-                  sin((i + directionWind) * 3.1415 / 180) /
+                  sin((i + directionWind + 180) * 3.1415 / 180) /
                   cos(lat * 3.1415 / 180) /
                   (6371000 * 3.1415 / 180));
           result.add(LatLng(latOne, lngOne));
@@ -277,12 +289,14 @@ class HomePage extends StatelessWidget {
 
         for (var i = 90; i <= 270; i++) {
           latOne = latStepOne +
-              (((widthV) * 1000 * cos((i + directionWind) * 3.1415 / 180)) /
+              (((widthV) *
+                      1000 *
+                      cos((i + directionWind + 180) * 3.1415 / 180)) /
                   (6371000 * 3.1415 / 180));
           lngOne = lngStepOne +
               ((widthV) *
                   1000 *
-                  sin((i + directionWind) * 3.1415 / 180) /
+                  sin((i + directionWind + 180) * 3.1415 / 180) /
                   cos(lat * 3.1415 / 180) /
                   (6371000 * 3.1415 / 180));
           result.add(LatLng(latOne, lngOne));
@@ -310,33 +324,35 @@ class HomePage extends StatelessWidget {
       } else {
         latStepOne = lat +
             ((((widthG - fireBall) * 1000) *
-                    cos((360 + directionWind) * 3.1415 / 180)) /
+                    cos((360 + directionWind + 180) * 3.1415 / 180)) /
                 (6371000 * 3.1415 / 180));
         lngStepOne = lng +
             (widthG - fireBall) *
                 1000 *
-                sin((360 + directionWind) * 3.1415 / 180) /
+                sin((360 + directionWind + 180) * 3.1415 / 180) /
                 cos(lat * 3.1415 / 180) /
                 (6371000 * 3.1415 / 180);
         latStepTwo = lat +
             ((((depthG - (widthG / 2)) * 1000) *
-                    cos((360 + directionWind) * 3.1415 / 180)) /
+                    cos((360 + directionWind + 180) * 3.1415 / 180)) /
                 (6371000 * 3.1415 / 180));
         lngStepTwo = lng +
             (depthG - (widthG / 2)) *
                 1000 *
-                sin((360 + directionWind) * 3.1415 / 180) /
+                sin((360 + directionWind + 180) * 3.1415 / 180) /
                 cos(lat * 3.1415 / 180) /
                 (6371000 * 3.1415 / 180);
 
         for (var i = -90; i <= 90; i++) {
           latOne = latStepTwo +
-              (((widthG / 2) * 1000 * cos((i + directionWind) * 3.1415 / 180)) /
+              (((widthG / 2) *
+                      1000 *
+                      cos((i + directionWind + 180) * 3.1415 / 180)) /
                   (6371000 * 3.1415 / 180));
           lngOne = lngStepTwo +
               ((widthG / 2) *
                   1000 *
-                  sin((i + directionWind) * 3.1415 / 180) /
+                  sin((i + directionWind + 180) * 3.1415 / 180) /
                   cos(lat * 3.1415 / 180) /
                   (6371000 * 3.1415 / 180));
           result.add(LatLng(latOne, lngOne));
@@ -344,12 +360,14 @@ class HomePage extends StatelessWidget {
 
         for (var i = 90; i <= 270; i++) {
           latOne = latStepOne +
-              (((widthG) * 1000 * cos((i + directionWind) * 3.1415 / 180)) /
+              (((widthG) *
+                      1000 *
+                      cos((i + directionWind + 180) * 3.1415 / 180)) /
                   (6371000 * 3.1415 / 180));
           lngOne = lngStepOne +
               ((widthG) *
                   1000 *
-                  sin((i + directionWind) * 3.1415 / 180) /
+                  sin((i + directionWind + 180) * 3.1415 / 180) /
                   cos(lat * 3.1415 / 180) /
                   (6371000 * 3.1415 / 180));
           result.add(LatLng(latOne, lngOne));
@@ -504,6 +522,21 @@ class HomePage extends StatelessWidget {
                           .read<GetTappedPoints>()
                           .changeTappedPoints(latlng);
                     }),
+                nonRotatedChildren: [
+                  ScaleLayerWidget(
+                      options: ScaleLayerPluginOption(
+                    lineColor: const Color.fromARGB(255, 3, 7, 250),
+                    lineWidth: 2,
+                    textStyle: const TextStyle(
+                        color: Color.fromARGB(255, 0, 47, 255), fontSize: 12),
+                    padding: const EdgeInsets.all(10),
+                  )),
+                  const FlutterMapZoomButtons(
+                    mini: true,
+                    padding: 10,
+                    alignment: Alignment.topRight,
+                  ),
+                ],
                 children: [
                   TileLayer(
                     urlTemplate:
